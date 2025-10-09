@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AirAsia — Путешествуй легко</title>
+  <meta name="description" content="Пример лендинга авиакомпании AirAsia — быстрый поиск рейсов, направления и спецпредложения." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Slab&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --primary:#e31b23; 
+      --dark:#0b0b0b;
+      --muted:#6b6b6b;
+      --glass: rgba(255,255,255,0.06);
+      --maxw:1100px;
+      font-family: 'Inter', Roboto, Arial, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(180deg,#071021 0%, #081426 60%);
+      color: #fff;
+      line-height: 1.5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap {
+      width: 90%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Roboto Slab', serif;
+      font-size: 24px;
+      animation: logoPulse 2s infinite alternate ease-in-out;
+      user-select: none;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .logo span {
+      font-family: 'Roboto Slab', serif;
+      line-height: 1;
+      color: #fff;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 18px;
+      text-decoration: none;
+      font-weight: 600;
+      opacity: 0.9;
+      position: relative;
+      transition: color 0.3s ease;
+      user-select: none;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: var(--primary);
+      left: 0;
+      bottom: -4px;
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+    nav a:hover {
+      color: var(--primary);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: center;
+      padding: 36px 0 48px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.3s;
+    }
+    .hero h1 {
+      font-size: 36px;
+      margin: 0 0 12px;
+      font-family: 'Roboto Slab', serif;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.5s;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      color: var(--muted);
+      margin: 0 0 20px;
+      font-size: 17px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.7s;
+      max-width: 480px;
+    }
+    .search {
+      background: var(--glass);
+      padding: 18px;
+      border-radius: 12px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.9s;
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+    }
+    .input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+      font-weight: 500;
+      user-select: text;
+    }
+    .input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 8px var(--primary);
+    }
+    select.input {
+      max-width: 140px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: transparent url("data:image/svg+xml,%3Csvg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+      background-size: 14px 14px;
+      padding-right: 36px;
+    }
+    .btn {
+      background: var(--primary);
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      color: #fff;
+      user-select: none;
+      font-size: 15px;
+      box-shadow: 0 3px 6px rgba(227, 27, 35, 0.6);
+    }
+    .btn:hover {
+      background-color: #c21419;
+      transform: scale(1.05);
+      box-shadow: 0 5px 12px rgba(227, 27, 35, 0.8);
+    }
+    .btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 5px rgba(227, 27, 35, 0.5);
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding: 18px;
+      border-radius: 12px;
+      transition: box-shadow 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+    }
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(255, 27, 35, 0.4);
+    }
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 28px 0;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 1.2s;
+    }
+    .stat {
+      padding: 18px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      text-align: center;
+      font-family: 'Roboto Slab', serif;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      cursor: default;
+      font-size: 14px;
+      color: #eee;
+    }
+    .stat:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(255, 27, 35, 0.3);
+      color: #fff;
+    }
+    .stat > div:first-child {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.015em;
+      color: #fff;
+    }
+    .dest {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
+      transition: background-color 0.25s ease;
+      padding: 8px;
+      border-radius: 12px;
+    }
+    .dest:focus,
+    .dest:hover {
+      background-color: rgba(255, 27, 35, 0.1);
+    }
+    .dest img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      user-select: none;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .dest:hover img {
+      transform: scale(1.05);
+    }
+    #offers {
+      box-shadow: 0 0 20px rgba(227,27,35,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #offers h3 {
+      margin-top: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    #offers p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.4;
+      margin: 10px 0 14px;
+    }
+    #offers strong {
+      font-size: 18px;
+      color: #fff;
+    }
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding: 22px 0;
+      margin-top: 48px;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      user-select: none;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer strong {
+      font-weight: 700;
+    }
+
+    /* Новый блок услуги */
+    #services {
+      margin-top: 48px;
+      padding: 36px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    #services h2 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 28px;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #fff;
+      letter-spacing: -0.015em;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 24px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(227,27,35,0.1);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 25px rgba(227,27,35,0.4);
+      transform: translateY(-8px);
+    }
+    .service-icon {
+      font-size: 48px;
+      color: var(--primary);
+      margin-bottom: 16px;
+      user-select: none;
+    }
+    .service-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+      font-family: 'Roboto Slab', serif;
+      letter-spacing: -0.01em;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes logoPulse {
+      0% {
+        box-shadow: 0 0 10px var(--primary);
+      }
+      100% {
+        box-shadow: 0 0 20px var(--primary);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"><span>AA</span></div>
+        <h1 aria-label="AirAsia — Путешествуй легко" style="font-family: 'Roboto Slab', serif; font-weight: 700; font-size: 20px; color: white;">AirAsia</h1>
+      </div>
+      <nav role="navigation" aria-label="Главное меню">
+        <a href="#search">Поиск рейсов</a>
+        <a href="#destinations">Направления</a>
+        <a href="#offers">Спецпредложения</a>
+        <a href="#services">Услуги</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Главный баннер">
+      <div>
+        <h1>Путешествуй легко с AirAsia</h1>
+        <p>Быстрый и удобный поиск рейсов, лучшие направления и выгодные предложения для вашего следующего путешествия.</p>
+        <div class="search" id="search" aria-label="Форма поиска рейсов">
+          <form>
+            <div class="row">
+              <input type="text" class="input" placeholder="Откуда" aria-label="Откуда" required />
+              <input type="text" class="input" placeholder="Куда" aria-label="Куда" required />
+            </div>
+            <div class="row" style="margin-top:10px;">
+              <input type="date" class="input" aria-label="Дата вылета" required />
+              <select class="input" aria-label="Количество пассажиров">
+                <option value="1">1 пассажир</option>
+                <option value="2">2 пассажира</option>
+                <option value="3">3 пассажира</option>
+                <option value="4">4 пассажира</option>
+              </select>
+              <button class="btn" type="submit" aria-label="Найти рейсы">Найти</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="offers" class="card" tabindex="0" aria-label="Специальные предложения">
+        <h3>Специальное предложение!</h3>
+        <p>Скидка до 30% на рейсы в Азию и Австралию.</p>
+        <strong>Бронируйте сейчас и путешествуйте с комфортом!</strong>
+      </div>
+    </section>
+
+    <section id="destinations" aria-label="Популярные направления">
+      <h2 style="margin-bottom: 24px; text-align:center; font-family:'Roboto Slab', serif; color: #fff;">Популярные направления</h2>
+      <div class="grid3">
+        <div class="dest" tabindex="0" role="button" aria-pressed="false">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Пляжи Бали" />
+          <div>
+            <strong>Бали</strong><br />
+            Идеальное место для отдыха и серфинга
+          </div>
+        </div>
+        <div class="dest" tabindex="0" role="button" aria-pressed="false">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Город Сингапур" />
+          <div>
+            <strong>Сингапур</strong><br />
+            Современный мегаполис с уникальной культурой
+          </div>
+        </div>
+        <div class="dest" tabindex="0" role="button" aria-pressed="false">
+          <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=400&q=80" alt="Австралийский город Сидней" />
+          <div>
+            <strong>Сидней</strong><br />
+            Знаменитый оперный театр и потрясающие пляжи
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Новый блок услуги -->
+    <section id="services" aria-label="Услуги AirAsia">
+      <h2>Наши услуги</h2>
+      <div class="services-grid">
+        <article class="service-card" tabindex="0" role="region" aria-labelledby="service1-title" aria-describedby="service1-desc">
+          <div class="service-icon" aria-hidden="true">✈️</div>
+          <h3 id="service1-title" class="service-title">Бронирование билетов</h3>
+          <p id="service1-desc" class="service-desc">Простой и быстрый поиск и бронирование авиабилетов на множество направлений.</p>
+        </article>
+        <article class="service-card" tabindex="0" role="region" aria-labelledby="service2-title" aria-describedby="service2-desc">
+          <div class="service-icon" aria-hidden="true">💺</div>
+          <h3 id="service2-title" class="service-title">Удобные места</h3>
+          <p id="service2-desc" class="service-desc">Выбирайте места заранее для максимального комфорта в полёте.</p>
+        </article>
+        <article class="service-card" tabindex="0" role="region" aria-labelledby="service3-title" aria-describedby="service3-desc">
+          <div class="service-icon" aria-hidden="true">🛄</div>
+          <h3 id="service3-title" class="service-title">Багаж и услуги</h3>
+          <p id="service3-desc" class="service-desc">Дополнительный багаж, спортивный инвентарь и другие услуги по вашему желанию.</p>
+        </article>
+        <article class="service-card" tabindex="0" role="region" aria-labelledby="service4-title" aria-describedby="service4-desc">
+          <div class="service-icon" aria-hidden="true">📱</div>
+          <h3 id="service4-title" class="service-title">Мобильное приложение</h3>
+          <p id="service4-desc" class="service-desc">Управляйте бронированиями и получайте уведомления прямо на смартфон.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 AirAsia. Все права защищены.</div>
+      <div>
+        <a href="#" style="color: var(--primary); text-decoration:none;">Политика конфиденциальности</a> | 
+        <a href="#" style="color: var(--primary); text-decoration:none;">Условия использования</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
